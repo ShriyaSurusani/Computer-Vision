@@ -1,0 +1,50 @@
+1. Course Number: 6820, Section Number: 003
+
+
+2. Name: Shriya Reddy Surusani
+
+
+3. Brief solution description:
+	-The purpose of this program is to implement the Discrete wavelet transform with command-line argument to select the pyramidal level.
+	-Output has 4 images, decomposed and reconstructed images before normalization and after normalization.
+	-I used 'scanf' to take the input of Pyramidal level from the command line.
+	-Pyramidal level needs to be given after "Enter pyramid level (Range=[0,8]): " message is displayed.
+	-I used HAAR wavlet for the transformation.
+	-Main program fetches the PGM image from disc and passes it on to PGMread function where it opens the file in 'read' mode, the image header is then read character by character, it is checked weather the input image header is that of pgm image, once satisfied it checks for the comments then scans the rows and columns from the header.
+	-Using the rows and columns, memory is allocated to the PGM struct. Rows and colums are sent as arguments to pgm_allocation function where the memory is dynamincally allocated for magic number and pixels.For the returned PGM struct, with allocated memory, each pixel is read in a linear fashion [i.e. (0,0)(0,1)...(0,c)(1,0)(1,1)...(1,c)...]. Once done, the processed PGM struct image is returned to main.
+	-In the main file the returned PGM struct is stored in 'gimg' whos copy of which is then passed as argument along with the 'level' to 'PGMdwt' function. Here, 5 loops are used. The first loop checks for the condition of how many time the decomposion needs to be performed. 2nd loop is used to convolve along the rows with the decomposition low pass filter and store in the first half of the columns of the destination image. 3rd loop is used to convolve along the rows with the decomposition high pass filter and store in the second half of the columns of the destination image. 4th loop is used to convolve along the columns with the decomposition low-pass filter and store it in the first half of the rows of the destination image. 5th loop is used to convolve along the columns with decomposition high-pass filter and store it in the second half of the rows of the destination image.
+	-The final decomposed image is returned to main which is normalized and printed.
+	-This decomposed image is copied to 'copydimg' and passed to "PGMidwt" function where inverse decomposion is performed.
+	-In "PGMidwt" function, the first loop is used to repeat the inverse decomposition logic on the image for 'level' number of times. In Next 2 loop the rows are swapped. Eg: Matrix  [1  2  3   4]  is swapped to [1  2  3  4]
+		         [5  6  7   8]  	       [9 10 11 12]		   
+		         [9  10 11 12]		       [5  6  7  8]
+		         [13 14 15 16]		       [13 14 15 16]
+	-Next two loops are used to convolve along the columns with reconstruction low pass filter and store it in the even rows of the destination image and reconstruction high pass filter to convolve along the columns and store in the odd rows of the destination image.
+	-Next two loops are to swap the rows again of the destination image.
+	-Next two loops are to swap the columns of the destination image. Eg: Matrix  [1  2  3   4] is swapped to [1  3  2   4]
+										       [5  6  7   8]		    [5  7  6   8]
+										       [9  10 11 12]		    [9  11 10 12]
+										       [13 14 15 16]		    [13 15 14 16]
+	-Next two loops are used to convolve along the rows with reconstruction low pass filter and store it in the even columns of the destination image and reconstruction high pass filter to convolve along the rows and store in the odd columns of the destination image.
+	-Next two loops are to swap the columns again of the destination image.
+	-This would be the final reconstructed image if the level was 0. If not this inner loops are executed until the level becomes 0.
+	-This final image is return to main and printed before and after normalization.
+	-Once done, memory is freed.
+	 
+
+4. Lessons learned: 
+	i) Getting the decomposition logic:
+		- Initially I got a black image as the output. I was trying to do padding while calculating the two adjesent pixels with the filter and store it in the first pixel like how we did for the sobel convolution but on rechecking I realised I gave the wrong indexing for the image in the loops and I saw the filter datatype I gave was float. Then I removed the padding and corrected the loops and changed the data type for filters and the image pixels to double then printed the intermidiate image to check if the logic worked. Once that was right, I just tweek the same logic to go over the columns to get the final image. 
+	
+	ii) Getting the reconstruction logic:
+		- After going through the numeric 1D example. I tried appling the same logic in 2D, taking a 8x8 matrix and did the calculations multiple times until I got the initial matrix right. Once that was right I coded it for level 0 and later implemented it with scanned level. 
+		
+		
+5. Usage instruction:
+	-Pyramidal level needs to be given after "Enter pyramid level (Range=[0,8]): " message is displayed on the terminal when the program is executed.
+	
+	
+	
+	
+	
+	

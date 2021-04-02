@@ -1,0 +1,18 @@
+1. Course Number: 6820, Section Number: 003
+
+
+2. Name: Shriya Reddy Surusani
+
+
+3. Brief solution description:
+	- The purpose of this program is to make a copy of the input video
+	- Video used for input is 640x480 dimentions of type .mp4 and frames per second is 60
+	- Flow of the program: the input video is captured, then the size of the video is read. Then, the codecc information for the output in mentioned. Each frame from the capture is then read and written to the output destination on disc. The, the output frames are displayed.
+	- Capture is then released.
+	- Input video is "Input.mp4" and output video is "Output.mov"
+
+4. Lessons learned: 
+	- MakeFile for Python
+	- Basic OpenCV functions
+	
+	

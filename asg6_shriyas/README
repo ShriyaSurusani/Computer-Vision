@@ -1,0 +1,24 @@
+1. Course Number: 6820, Section Number: 003
+
+
+2. Name: Shriya Reddy Surusani
+
+
+3. Brief solution description:
+	-The purpose of this program is to perform Camera Calibration using OpenCV
+	-Video used for input is 448x336 dimentions of type .mp4 and frames per second is 30
+	-Output video is 300x250 dimentions of type .mov and frames per second is 30
+	-Flow of the program: The input video is captured, then the size of the video is read. Then, the codecc information for the output is mentioned, Object and 	image points array is taken. Each frame from the capture is then read and resized and converted to grayscale image. Now, chessboard corners are searched and 	if found, the objectpoints and the image points are appended. Now, Camera calibration is done to get the camera matrix and the distortion coefficients. Now we 	use the object pointers, corners, camera matrix and the distortion coefficients found to get the rotation, translation vector to draw the axes.
+	-Camera Matrix and distortion coefficients are printed and saved to "Camera_Matrix", "Distortion_coeff" csv file.
+	-Frame is written to the output destination on disc.The output frames are then displayed.
+	-Capture is then released.
+	-Input video is "Input.mp4" and output video is "output.mov"
+	
+4. Lessons learned: 
+	-Error when I passed RGB frame to "cv2.calibrateCamera(objpoints, imgpoints, resized.shape[::-1],None,None)":
+		".shape[::-1]" in "cv2.calibrateCamera" only take 2 values as input and the RGB frame has 3 input values. So, converting the frame to gray image and 		passing it to ".shape[::-1]" resolved the issue.
+	-Error, objp[:,:,] = np.mgrid[0:9,0:6].T.reshape(-1,2). ValueError: could not broadcast input array from shape (54,2) into shape (54,3):
+		Resolved the issue by changing objp[:,:,] to objp[:,:2]
+
+5. Special Usage:
+	-The display frames of the output is slow because of the command to change the RGB frame to gray for processing of the further code. Virtual computing machine that I developed the code in is slow and thus the slowness of the display video is caused by the processing of the image. Once the whole display video is processed and closed by itself after the execution of the code, the output video saved on the disc "output.mov" is of normal speed and the output can be seen without any distruption. Since the display video takes time. 'q' can be pressed after a minute to stop the processing. The camera matrix and distortion coefficients can still be seen.

@@ -1,0 +1,26 @@
+1. Course Number: 6820, Section Number: 003
+
+
+2. Name: Shriya Reddy Surusani
+
+
+3. Brief solution description:
+	- The purpose of this program is Tracking and Detection of human face, eyes, nose and mouth.
+	- Video used for input is 768x432 dimentions of type .mp4 and frames per second is 12
+	- Output video is 1152x648 dimentions of type .mov and frames per second is 12
+	- Flow of the program: The input video is captured, then the size of the video is read. Then, the codecc information for the output is mentioned with hardcoded size of the resized frame. Each frame from the capture is then read and resized with x1.5 and initially the face is detected. Then, from the region of intrest of the face, eyes, nose and mouth features of the face are detected and tracked. Then, frame is written to the output destination on disc.The output frames are then displayed.
+	- Capture is then released.
+	- Input video is "Input2.mp4" and output video is "Output.mov"
+
+4. Lessons learned: 
+	- Invalid HAAR feature (expected: 'rw.r.x + rw.r.width <= W'), where 'rw.r.x + rw.r.width' is 21 must be less than or equal to 'W' is 20
+		For nose and mouth detection. It throwed the following errors while using haar cascades. To overcome this, I changed the hardcoded size values in the xml files such that it had the minimum value required to detect nose and mouth.
+		
+	- Eyes, nose and mouth had a lot of false positives
+		To overcome this, I resized the image and adjusted the region of intrest values for each feature.
+		     
+	
+
+
+
+
