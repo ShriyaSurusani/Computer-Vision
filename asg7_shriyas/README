@@ -1,0 +1,28 @@
+1. Course Number: 6820, Section Number: 003
+
+
+2. Name: Shriya Reddy Surusani
+
+
+3. Brief solution description:
+	-The purpose of this program is to detect aruco marker and specify virtual rectangle to draw in relation to the marker using OpenCV
+	-Video used for input is 448x368 dimentions of type .mp4 and frames per second is 30
+	-Output video is 300x250 dimentions of type .mov and frames per second is 30
+	
+	-Flow of the program: The input video is captured, then the size of the video is read. Then, the codecc information for the output is mentioned. The camera matrix and distortion coeffecient values that we got from the camera calliberation are then read from the same directory. 
+	-Axis points of the rectangle are initialised.
+	-Now, from each frame, aruco markers of dictionary "DICT_4X4_50" are detected and the parameters, ids, corners and the rejected values of the detected markers are found.
+	-Then, pose estimation is done to get the rotational and translational vectors. Then, the axis along x, y, z are drawn using camera matrix, distortion coefficients, rotational and translational vectors.
+	-Now, projectPoints() is used to get the image points such that they are used to draw the rectangle in relation to the marker along the y-axis.
+	-Rotational, translational vectors and corners of the marker detected are printed. 
+	-Frame is written to the output destination on disc.The output frames are then displayed.
+	-Capture is then released.
+	-Input video is "Input.mp4" and output video is "output.mov"
+	
+4. Lessons learned:
+	- How to use the projectPoints() returned values to draw an area of intrest over the detected marker.
+ 
+	- Error: Assertion fail for aruco.drawMarker
+		Using aruco.drawDetectedMarkers solved the issue.
+		
+
